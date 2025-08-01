@@ -1,0 +1,65 @@
+// Creating the 'titles' collection - no enum for genres
+db.createCollection("titles", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["_id", "primaryTitle", "titleType", "isAdult"],
+      properties: {
+        _id: { bsonType: "long" },
+        primaryTitle: { bsonType: "string", maxLength: 500 },
+        originalTitle: { bsonType: "string", maxLength: 500 },
+        titleType: { bsonType: "string", maxLength: 50 },
+        isAdult: { bsonType: "bool" },
+        startYear: { bsonType: ["int", "null"] },
+        endYear: { bsonType: ["int", "null"] },
+        runtimeMinutes: { bsonType: ["int", "null"] },
+        genres: {
+          bsonType: ["array"],
+          items: { bsonType: "string" }  // no enum
+        },
+        actors: { bsonType: ["array"], items: { bsonType: "long" } },
+        directors: { bsonType: ["array"], items: { bsonType: "long" } },
+        writers: { bsonType: ["array"], items: { bsonType: "long" } },
+        producers: { bsonType: ["array"], items: { bsonType: "long" } }
+      }
+    }
+  }
+});
+
+// Creating the `persons' collection
+db.createCollection("persons", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["_id"],
+      properties: {
+        _id: { bsonType: "long" },
+        primaryName: { bsonType: "string", maxLength: 255 },
+        birthYear: { bsonType: ["int", "null"] },
+        deathYear: { bsonType: ["int", "null"] }
+      }
+    }
+  }
+});
+
+// Creating the `ratings' collection
+db.createCollection("ratings", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["_id", "averageRating", "numVotes"],
+      properties: {
+        _id: { bsonType: "long" }, // same as tconst
+        averageRating: {
+          bsonType: "double",
+          minimum: 0.0,
+          maximum: 10.0
+        },
+        numVotes: {
+          bsonType: "int",
+          minimum: 0
+        }
+      }
+    }
+  }
+});

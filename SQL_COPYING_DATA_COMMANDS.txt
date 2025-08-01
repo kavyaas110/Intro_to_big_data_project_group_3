@@ -1,0 +1,12 @@
+\timing
+SET client_encoding TO 'utf8';
+\COPY title FROM 'C:\\Users\\kavya\\big data\\cleaned_title_basics.tsv'  WITH (FORMAT csv, DELIMITER E'\t', HEADER, NULL '\N', QUOTE E'\b');
+\COPY person FROM 'C:\\Users\\kavya\\big data\\cleaned_name_basics.tsv'  WITH (FORMAT csv, DELIMITER E'\t', HEADER, NULL '\N', QUOTE E'\b');
+INSERT INTO genre (genrename) VALUES ('Action'),('Drama'),('Biography'),('Game-Show'),('Reality-TV'),('Adventure'),('Short'),('Horror'),('Crime'),('Romance'),('Sport'),('War'),('Music'),('Adult'),('Thriller'),('Mystery'),('History'),('Documentary'),('Western'),('Fantasy'),('Comedy'),('Musical'),('Talk-Show'),('Sci-Fi'),('Animation'),('Family'),('News'), ('Film-Noir');
+\COPY rating FROM 'C:\\Users\\kavya\\big data\\cleaned_title_ratings.tsv'  WITH (FORMAT csv, DELIMITER E'\t', HEADER, NULL '\N', QUOTE E'\b');
+\COPY has_genre FROM 'C:\\Users\\kavya\\big data\\cleaned_genre_title_mapping.tsv'  WITH (FORMAT csv, DELIMITER E'\t', HEADER, NULL '\N', QUOTE E'\b');
+\COPY acts_in FROM 'C:\\Users\\kavya\\big data\\cleaned_actors.tsv'  WITH (FORMAT csv, DELIMITER E'\t', HEADER, NULL '\N', QUOTE E'\b');
+\COPY produces FROM 'C:\\Users\\kavya\\big data\\cleaned_producers.tsv'  WITH (FORMAT csv, DELIMITER E'\t', HEADER, NULL '\N', QUOTE E'\b');
+\COPY writes FROM 'C:\\Users\\kavya\\big data\\cleaned_writers.tsv'  WITH (FORMAT csv, DELIMITER E'\t', HEADER, NULL '\N', QUOTE E'\b');
+\COPY directs FROM 'C:\\Users\\kavya\\big data\\cleaned_directors.tsv'  WITH (FORMAT csv, DELIMITER E'\t', HEADER, NULL '\N', QUOTE E'\b');
+DELETE FROM title WHERE isAdult = True;
